@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>スイカ割り</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js"></script>
+</head>
+
+<body>
+	<script>
+		const app = new PIXI.Application();
+		document.body.appendChild(app.view);
+
+		let arrow = PIXI.Sprite.from('./arrow.png');
+		let tgt = PIXI.Sprite.from('./suika.png');
+		tgt.position.x=0;
+
+		arrow.x=400;
+		arrow.y=500;
+		arrow.anchor.x=0.5;
+		arrow.anchor.y=0.5;
+		tgt.anchor.x=0.5;
+		tgt.anchor.y=0.5
+		let pt=tgt.position;
+		let tgt_width = 300;
+		tgt.y = 100;
+
+
+
+		app.stage.addChild(arrow);
+		app.stage.addChild(tgt);
+
+		tama_hit()
+
+		app.ticker.add(function(delta){
+
+			function arrow_shoot() {
+				window.addEventListener('click', function () {
+					arrow.y -= 20 * delta
+				})
+			}
+			if(arrow.y>= 100 && arrow.y < 200){
+				arrow.position.y = 500
+			}
+			if (tgt.x >= 800 && tgt.x < 900) {
+				tgt.position.x = 0
+			}
+			tgt.x += 8 * delta;
+
+
+		})
+
+		function tama_hit(){
+			let pt = arrow.position;
+			if(tgt.containsPoint(pt)){
+				alert('hit!')
+			}
+		}
+
+
+
+
+
+	</script>
+</body>
+
+</html>
